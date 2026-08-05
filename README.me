@@ -1,0 +1,141 @@
+# ETL Pipeline Using Python Generators and Pandas
+
+## Project Overview
+
+This project demonstrates a simple **ETL (Extract, Transform, Load)** pipeline built in Python. It processes a CSV dataset containing approximately **1,000 rows and 50 columns** of sample employee data.
+
+The project focuses on **generator-based data extraction**, **data cleaning**, **loading data into a Pandas DataFrame**, and **analyzing memory usage**. It also compares the memory behavior of generator-based processing with the traditional `pandas.read_csv()` approach.
+
+---
+
+## Features
+
+* Extract data using Python generators (`yield`)
+* Clean and transform CSV data
+* Load transformed data into a Pandas DataFrame
+* Export cleaned data to a new CSV file
+* Measure memory usage using `psutil`
+* Compare generator-based processing with `pd.read_csv()`
+* Demonstrate Python garbage collection
+
+---
+
+## Technologies Used
+
+* Python 3
+* Pandas
+* CSV
+* psutil
+* openpyxl
+
+---
+
+## Project Structure
+
+```text
+ETL_Pipeline/
+│
+├── data/
+│   ├── sample_data.csv
+│   └── cleaned_data.csv
+│
+├── src/
+│   ├── generate_sample_data.py
+│   ├── extract.py
+│   ├── transform.py
+│   └── load.py
+│
+├── main.py
+├── requirements.txt
+├── README.md
+└── .gitignore
+```
+
+---
+
+## ETL Workflow
+
+### Extract
+
+* Reads the CSV file using a generator.
+* Processes one row at a time using the `yield` keyword.
+* Avoids loading the entire dataset into memory during extraction.
+
+### Transform
+
+The extracted data is cleaned by:
+
+* Removing leading and trailing whitespace.
+* Replacing missing values with `None`.
+* Standardizing selected text fields.
+* Preparing the data for loading.
+
+### Load
+
+* Loads the cleaned records into a Pandas DataFrame.
+* Saves the cleaned dataset as `cleaned_data.csv`.
+
+---
+
+## Memory Analysis
+
+Memory usage is measured at different stages of the pipeline:
+
+* Before ETL
+* After generator-based ETL
+* After loading the dataset with `pd.read_csv()`
+* After garbage collection
+
+### Observation
+
+For this dataset (~1,000 rows), the generator-based ETL used **less memory** than loading the entire CSV with `pd.read_csv()`. Although the difference is small for a relatively small dataset, generator-based processing scales better for much larger files because it processes one row at a time during extraction.
+
+---
+
+## Key Learning Outcomes
+
+* Understanding the ETL process
+* Using Python generators with `yield`
+* Cleaning and transforming data
+* Creating and working with Pandas DataFrames
+* Measuring memory usage using `psutil`
+* Understanding Python garbage collection
+* Comparing streaming data processing with full DataFrame loading
+
+---
+
+## How to Run
+
+1. Clone the repository.
+
+2. Install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Run the project:
+
+```bash
+python main.py
+```
+
+---
+
+## Sample Output
+
+The program displays:
+
+* First five rows of the cleaned dataset
+* Number of rows and columns
+* DataFrame memory usage
+* Total DataFrame memory
+* Memory usage after generator-based ETL
+* Memory usage after `pd.read_csv()`
+* Memory usage after garbage collection
+
+---
+
+## Author
+
+**Maham Iqbal**
